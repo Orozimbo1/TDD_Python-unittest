@@ -8,8 +8,22 @@ class Pessoa:
     API:
         obter_todos_os_dados -> method
             OK
-            404
 """
+try:
+    import sys
+    import os
+
+    sys.path.append(
+        os.path.abspath(
+            os.path.join(
+                os.path.dirname(__file__),
+                '../src'
+            )
+        )
+    )
+except:
+    raise
+
 import unittest
 from unittest.mock import patch
 from Pessoa import Pessoa
@@ -38,12 +52,7 @@ class testePessoa(unittest.TestCase):
             fake_request.return_value.ok = True
 
         self.assertEqual(self.p1.obter_todos_os_dados(), 'CONECTADO')
-
-    def teste_obter_todos_os_dados_falha_404(self):
-        with patch('requests.get') as fake_request:
-            fake_request.return_value.ok = False
-
-        self.assertEqual(self.p1.obter_todos_os_dados(), 'ERRO 404')
+        self.assertTrue(self.p1.dados_obtidos)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

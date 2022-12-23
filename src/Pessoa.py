@@ -10,6 +10,7 @@ class Pessoa:
         resposta = requests.get('https://www.google.com')
 
         if resposta.ok:
+            self.dados_obtidos = True
             return 'CONECTADO'
-        else:
+        else: 
             return 'ERRO 404'
